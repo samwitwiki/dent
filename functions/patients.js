@@ -1,5 +1,4 @@
 var Patients = require('../model/patients');
-var patient;
 
 function patients () {
   var _this = this;
@@ -7,14 +6,22 @@ function patients () {
 
 module.exports = patients;
 
-patients.prototype.savePatient = function (query) {
+patients.prototype.savePatient = function (model, query) {
+  var _this = this;
+  var patient;
+  var model;
+
   console.log("THIS savePatient has been called!");
-  console.log("QUERY : ", query);
-  // var patient = new Patients({
-  //
-  // });
-  // patient.save(function(err) {
-  //   if (err) throw err;
-  //   console.log('User saved successfully!');
-  // });
+  patient = new Patients(model);
+  model = patient.patientsModel();
+
+  model({
+    lastName: "lname",
+    firstName: "fname",
+    email: 'samuel@gmail.com',
+    uniqueName: '14223214213'
+  }).save(function(err) {
+    if (err) throw err;
+    console.log('User saved successfully!');
+  });
 }
